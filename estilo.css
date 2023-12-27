@@ -1,0 +1,14 @@
+body {
+    background-color: black;
+
+    h1 {
+        color: aliceblue;
+        text-align: center;
+    }
+
+    p {
+        color: aliceblue;
+        text-align: center;
+        margin: 5%;
+    }
+}
