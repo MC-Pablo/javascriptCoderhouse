@@ -11,37 +11,45 @@
 
 const USUARIO = "drmengele";
 const CONTRASEÑA = "admin";
-let intentosFallidos = 0;
-let mensaje;
 
 function validarUsuario() {
+    let intentosFallidos = 0;
+    let puedeContinuar = true;
+
     while (intentosFallidos < 3) {
-        let usuario = prompt('Ingrese su usuario:');
-        let contraseña = prompt('Ingrese su contraseña:');
+        let usuario = prompt("Ingrese su usuario:");
+        let contraseña = prompt("Ingrese su contraseña:");
 
         if (usuario === USUARIO && contraseña === CONTRASEÑA) {
-            alert('Bienvenido drmengele');
-
-            return;
+            puedeContinuar = true;
+            break;
         } else {
             intentosFallidos++;
-            mensaje = 'Usuario o contraseña incorrecta'
+            puedeContinuar = false;
+            alert("Usuario o contraseña incorrecta");
         }
-        alert(mensaje);
     }
-    alert("Usuario bloqueado, dirigirse a Administración");
+
+    if (puedeContinuar) {
+        constatarParametros();
+    } else {
+        alert("Usuario bloqueado");
+    }
 }
 
 validarUsuario();
 
-let globulosBlancos;
-
 function constatarParametros() {
-    while (globulosBlancos >= 1500) {
-        globulosBlancos = parseInt(prompt('Neutrófilos:'));
+    let globulosBlancos = parseInt(prompt("Neutrófilos:"));
+    let mensaje;
 
-
-
+    if (globulosBlancos >= 1500) {
+        mensaje = "Puede continuar con la titulacion de Clozapina";
+    } else {
+        mensaje = "¡Alerta!❌ Indicadores de Neutropenia. Evaluar titulacion";
     }
 
+    alert(mensaje);
 }
+
+constatarParametros();
