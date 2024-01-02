@@ -21,6 +21,7 @@ function validarUsuario() {
         let contraseña = prompt("Ingrese su contraseña:");
 
         if (usuario === USUARIO && contraseña === CONTRASEÑA) {
+
             puedeContinuar = true;
             break;
         } else {
@@ -45,6 +46,7 @@ function constatarParametros() {
 
     if (globulosBlancos >= 1500) {
         mensaje = "Puede continuar con la titulacion de Clozapina";
+
     } else {
         mensaje = "¡Alerta!❌ Indicadores de Neutropenia. Evaluar titulacion";
     }
@@ -52,4 +54,3 @@ function constatarParametros() {
     alert(mensaje);
 }
 
-constatarParametros();
