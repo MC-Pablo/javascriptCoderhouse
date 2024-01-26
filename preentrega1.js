@@ -9,10 +9,23 @@
 
 //3) Si todos los valores anteriores estan dentro de lo esperable, SI podra aceptarse la aplicacion la medicacion, de lo contrario NO se podrá.
 
-/* const USUARIO = usuarios.usuario;
-const CONTRASEÑA = usuarios.contraseña;
-
-function validarUsuario() {
+const usuarios = [
+    {
+      usuario: "drmengele",
+      contraseña: "admin",
+    },
+    {
+      usuario: "drriviera",
+      contraseña: "admin",
+    },
+    {
+      usuario: "drfrink",
+      contraseña: "admin",
+    },
+  ];
+  
+ 
+  function validarUsuario() {
     let intentosFallidos = 0;
     let puedeContinuar = true;
 
@@ -54,7 +67,6 @@ function constatarParametros() {
     alert(mensaje);
 }
 
-*/
 
 
 //  Segunda preentrega //
@@ -73,24 +85,8 @@ const profesional3 = new personal ("drfrink" , "médico", "psiquiatra");
 
 
 
-const usuarios = [ {
-    usuario: "drmengele",
-    constraseña: "admin"
-},
-{
-    usuario: "drriviera",
-    contraseña: "admin"
-},
-{
-usuario: "drfrink",
-contraseña:"admin"
-
-}
-
-]
 
 
-//objeto???
 /* const usuario1 = new usuarios ("drmengele", "admin");
 const usuario2 = new usuarios ("drriviera","admin");
 const usuario3 = new usuarios ("drfrink", "admin"); */ 
