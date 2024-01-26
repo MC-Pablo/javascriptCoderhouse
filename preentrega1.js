@@ -9,79 +9,86 @@
 
 //3) Si todos los valores anteriores estan dentro de lo esperable, SI podra aceptarse la aplicacion la medicacion, de lo contrario NO se podrá.
 
-const usuarios = [
-    {
-      usuario: "drmengele",
-      contraseña: "admin",
-    },
-    {
-      usuario: "drriviera",
-      contraseña: "admin",
-    },
-    {
-      usuario: "drfrink",
-      contraseña: "admin",
-    },
-  ];
-  
- 
-  function validarUsuario() {
-    let intentosFallidos = 0;
-    let puedeContinuar = true;
+const baseDatos = [
+  {
+    usuario: "drmengele",
+    contraseña: "admin",
+  },
+  {
+    usuario: "drriviera",
+    contraseña: "admin",
+  },
+  {
+    usuario: "drfrink",
+    contraseña: "admin",
+  },
+];
 
-    while (intentosFallidos < 3) {
-        let usuario = prompt("Ingrese su usuario:");
-        let contraseña = prompt("Ingrese su contraseña:");
 
-        if (usuario === USUARIO && contraseña === CONTRASEÑA) {
+while (intentosFallidos < 3) {
+  let usuarioValido = prompt("Ingrese su usuario:");
+  let contraseñaValida = prompt("Ingrese su contraseña:");
 
-            puedeContinuar = true;
-            break;
-        } else {
-            intentosFallidos++;
-            puedeContinuar = false;
-            alert("Usuario o contraseña incorrecta");
-        }
-    }
+  const usuarioEncontrado = baseDatos.find((ingreso) => ingreso.usuario === usuarioValido);
+  const contraseñaEncontrada = baseDatos.find((ingreso) => ingreso.contraseña === contraseñaValida);
 
-    if (puedeContinuar) {
-        constatarParametros();
-    } else {
-        alert("Usuario bloqueado");
-    }
+  if (usuarioEncontrado && contraseñaEncontrada) {
+    mensaje = "¡Bienvenido!";
+    alert(mensaje);
+    return true;
+  } else {
+    intentosFallidos++;
+    mensaje = "Usuario o contraseña incorrecta";
+    alert(mensaje);
+  }
 }
+
+if (intentosFallidos >= 3) {
+  alert("Usuario bloqueado");
+  return false;
+}
+
 
 validarUsuario();
 
+
 function constatarParametros() {
-    let globulosBlancos = parseInt(prompt("Neutrófilos:"));
-    let mensaje;
+  const globulosBlancos = obtenerGlobulosBlancos();
+  let mensaje;
 
-    if (globulosBlancos >= 1500) {
-        mensaje = "Puede continuar con la titulacion de Clozapina";
+  if (globulosBlancos >= 1500) {
+    mensaje = MENSAJE_CONTINUAR;
+  } else {
+    mensaje = MENSAJE_ALERTA;
+  }
 
-    } else {
-        mensaje = "¡Alerta!❌ Indicadores de Neutropenia. Evaluar titulacion";
-    }
-
-    alert(mensaje);
+  alert(mensaje);
 }
+
+function obtenerGlobulosBlancos() {
+  return parseInt(prompt("Neutrófilos:"));
+}
+
+const MENSAJE_CONTINUAR = "Puede continuar con la titulacion de Clozapina";
+const MENSAJE_ALERTA = "¡Alerta!❌ Indicadores de Neutropenia. Evaluar titulacion";
+
+validarUsuario();
 
 
 
 //  Segunda preentrega //
 
 
-function personal (nombre, profesion, especialidad) {
-    this.nombre = nombre;
-    this.profesion = profesion;
-    this.especialidad = especialidad;
+function personal(nombre, profesion, especialidad) {
+  this.nombre = nombre;
+  this.profesion = profesion;
+  this.especialidad = especialidad;
 
 };
 
-const profesional1 = new personal ("drmengele", "médico", "psiquiatra");
-const profesional2 = new personal ("drriviera", "médico", "psiquiatra");   
-const profesional3 = new personal ("drfrink" , "médico", "psiquiatra");
+const profesional1 = new personal("drmengele", "médico", "psiquiatra");
+const profesional2 = new personal("drriviera", "médico", "psiquiatra");
+const profesional3 = new personal("drfrink", "médico", "psiquiatra");
 
 
 
@@ -89,5 +96,5 @@ const profesional3 = new personal ("drfrink" , "médico", "psiquiatra");
 
 /* const usuario1 = new usuarios ("drmengele", "admin");
 const usuario2 = new usuarios ("drriviera","admin");
-const usuario3 = new usuarios ("drfrink", "admin"); */ 
+const usuario3 = new usuarios ("drfrink", "admin"); */
 
