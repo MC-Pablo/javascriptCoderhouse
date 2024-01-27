@@ -25,54 +25,51 @@ const baseDatos = [
 ];
 
 
-while (intentosFallidos < 3) {
-  let usuarioValido = prompt("Ingrese su usuario:");
-  let contraseñaValida = prompt("Ingrese su contraseña:");
 
-  const usuarioEncontrado = baseDatos.find((ingreso) => ingreso.usuario === usuarioValido);
-  const contraseñaEncontrada = baseDatos.find((ingreso) => ingreso.contraseña === contraseñaValida);
+function validarUsuario() {
+  let intentosFallidos = 0;
+  let puedeContinuar = true;
 
-  if (usuarioEncontrado && contraseñaEncontrada) {
-    mensaje = "¡Bienvenido!";
-    alert(mensaje);
-    return true;
+  while (intentosFallidos < 3) {
+    let usuarioValido = prompt("Ingrese su usuario:");
+    let contraseñaValida = prompt("Ingrese su contraseña:");
+    const usuarioEncontrado = baseDatos.find((ingreso) => ingreso.usuario === usuarioValido);
+    const contraseñaEncontrada = baseDatos.find((ingreso) => ingreso.contraseña === contraseñaValida);
+    
+
+    if (usuarioEncontrado && contraseñaEncontrada) {
+      puedeContinuar = true;
+      break;
+    } else {
+      intentosFallidos++;
+      puedeContinuar = false;
+      alert("Usuario o contraseña incorrecta");
+    }
+  }
+
+  if (puedeContinuar) {
+    constatarParametros();
   } else {
-    intentosFallidos++;
-    mensaje = "Usuario o contraseña incorrecta";
-    alert(mensaje);
+    alert("Usuario bloqueado");
   }
 }
-
-if (intentosFallidos >= 3) {
-  alert("Usuario bloqueado");
-  return false;
-}
-
 
 validarUsuario();
 
 
+
 function constatarParametros() {
-  const globulosBlancos = obtenerGlobulosBlancos();
+  let globulosBlancos = parseInt(prompt("Neutrófilos:"));
   let mensaje;
 
   if (globulosBlancos >= 1500) {
-    mensaje = MENSAJE_CONTINUAR;
+    mensaje = "Puede continuar con la titulacion de Clozapina";
   } else {
-    mensaje = MENSAJE_ALERTA;
+    mensaje = "¡Alerta!❌ Indicadores de Neutropenia. Evaluar titulacion";
   }
 
   alert(mensaje);
 }
-
-function obtenerGlobulosBlancos() {
-  return parseInt(prompt("Neutrófilos:"));
-}
-
-const MENSAJE_CONTINUAR = "Puede continuar con la titulacion de Clozapina";
-const MENSAJE_ALERTA = "¡Alerta!❌ Indicadores de Neutropenia. Evaluar titulacion";
-
-validarUsuario();
 
 
 
