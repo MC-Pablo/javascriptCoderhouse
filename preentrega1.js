@@ -9,6 +9,9 @@
 
 //3) Si todos los valores anteriores estan dentro de lo esperable, SI podra aceptarse la aplicacion la medicacion, de lo contrario NO se podrá.
 
+
+////////////////////////// ARRAYS /////////////////////////////////
+
 const baseDatos = [
   {
     usuario: "drmengele",
@@ -24,7 +27,68 @@ const baseDatos = [
   },
 ];
 
+function personal(nombre, profesion, especialidad) {
+  this.nombre = nombre;
+  this.profesion = profesion;
+  this.especialidad = especialidad;
 
+};
+
+const profesional1 = new personal("drmengele", "médico", "psiquiatra");
+const profesional2 = new personal("drriviera", "médico", "psiquiatra");
+const profesional3 = new personal("drfrink", "médico", "psiquiatra");
+
+const benzo = [
+  {
+    monodroga: 'alprazolam',
+    dosis: [0.5, 1],
+
+  },
+  {
+    nombre: 'clonazepam',
+    dosis: [0.5, 1, 2],
+
+  },
+  {
+    nombre: 'lorazepam',
+    dosis: [1, 2, 5],
+
+  },
+  {
+    nombre: 'diazepam',
+    dosis: [5, 10],
+
+  },
+];
+
+
+const antipsicoticos = [
+  {
+    nombre: 'haloperidol',
+    dosis: [5, 10]
+  },
+  {
+    nombre: 'risperidona',
+    dosis: [1, 2],
+  },
+  {
+    nombre: 'olanzapina',
+    dosis: [5, 10],
+
+  },
+  {
+    nombre: 'quetiapina',
+    dosis: [25, 100, 200]
+  },
+  {
+    nombre: 'clozapina',
+    dosis: [25, 100]
+  }
+];
+
+
+
+//////////////////////SISTEMA DE VALIDACION DE USUARIO////////////////////////
 
 function validarUsuario() {
   let intentosFallidos = 0;
@@ -35,7 +99,7 @@ function validarUsuario() {
     let contraseñaValida = prompt("Ingrese su contraseña:");
     const usuarioEncontrado = baseDatos.find((ingreso) => ingreso.usuario === usuarioValido);
     const contraseñaEncontrada = baseDatos.find((ingreso) => ingreso.contraseña === contraseñaValida);
-    
+
 
     if (usuarioEncontrado && contraseñaEncontrada) {
       puedeContinuar = true;
@@ -50,13 +114,13 @@ function validarUsuario() {
   if (puedeContinuar) {
     constatarParametros();
   } else {
-    alert("Usuario bloqueado");
+    alert("Usuario bloqueado.Dirigirse a Administracion");
   }
 }
 
 validarUsuario();
 
-
+///////////////////////TRATAMIENTO//////////////////////////////////////
 
 function constatarParametros() {
   let globulosBlancos = parseInt(prompt("Neutrófilos:"));
@@ -72,26 +136,37 @@ function constatarParametros() {
 }
 
 
+function continuarTratamiento() {
+  const indicacion = confirm("¿Desea realizar otra indicacion medica?");
+  if (indicacion) {
+    nuevoTratamiento();
+  } else {
+    return;
+  }
+}
 
-//  Segunda preentrega //
+continuarTratamiento()
+
+function nuevoTratamiento () {
+  let nuevaIndicacion = prompt ('Medicacion indicada');
+  let mensaje;
+  const medicamentos1 = benzo.find  ((medicacion) => medicacion.nombre === nuevaIndicacion);
+  const medicamentos2 = antipsicoticos.find  ((medicacion) => medicacion.nombre === nuevaIndicacion);
+  
+  if (medicamentos1 || medicamentos2) { 
+  mensaje = 'Indicacion agregada al esquema farmacologico';
+  } else{
+    mensaje = 'Medicamento fuera de stock. Derivar a Centro de salud';
+  }
+  alert (mensaje)
+  return mensaje;
+
+}
 
 
-function personal(nombre, profesion, especialidad) {
-  this.nombre = nombre;
-  this.profesion = profesion;
-  this.especialidad = especialidad;
-
-};
-
-const profesional1 = new personal("drmengele", "médico", "psiquiatra");
-const profesional2 = new personal("drriviera", "médico", "psiquiatra");
-const profesional3 = new personal("drfrink", "médico", "psiquiatra");
 
 
 
 
 
-/* const usuario1 = new usuarios ("drmengele", "admin");
-const usuario2 = new usuarios ("drriviera","admin");
-const usuario3 = new usuarios ("drfrink", "admin"); */
 
