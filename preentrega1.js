@@ -12,7 +12,7 @@
 
 ////////////////////////// ARRAYS /////////////////////////////////
 
-const baseDatos = [
+ const baseDatos = [
   {
     usuario: "drmengele",
     contraseña: "admin",
@@ -25,6 +25,10 @@ const baseDatos = [
     usuario: "drfrink",
     contraseña: "admin",
   },
+{
+  usuario:"drhouse",
+  contraseña:"admin"
+}
 ];
 
 function personal(nombre, profesion, especialidad) {
@@ -37,6 +41,7 @@ function personal(nombre, profesion, especialidad) {
 const profesional1 = new personal("drmengele", "médico", "psiquiatra");
 const profesional2 = new personal("drriviera", "médico", "psiquiatra");
 const profesional3 = new personal("drfrink", "médico", "psiquiatra");
+const profesional4= new personal ("drhouse", "medico", "clinico")
 
 const benzo = [
   {
@@ -86,22 +91,43 @@ const antipsicoticos = [
   }
 ];
 
+const antidepresivos =[ 
+  {
+    nombre: 'sertralina',
+    dosis: [50, 100],
+  },
+
+  {
+    nombre: 'fluoexetina',
+    dosis: [50, 100],
+
+  },
+
+  {
+    nombre:'paroxetina',
+    dosis: [50, 100],
+
+  }
+]
 
 
 //////////////////////SISTEMA DE VALIDACION DE USUARIO////////////////////////
+const form = document.querySelector("#formulario");
 
-function validarUsuario() {
+formulario.addEventListener("submit", (event) => {
+  event.preventdefault();
   let intentosFallidos = 0;
   let puedeContinuar = true;
 
   while (intentosFallidos < 3) {
-    let usuarioValido = prompt("Ingrese su usuario:");
-    let contraseñaValida = prompt("Ingrese su contraseña:");
+    let usuarioValido = document.querySelector("#usuario").value;
+    let contraseñaValida = document.querySelector("#contraseña").value;
     const usuarioEncontrado = baseDatos.find((ingreso) => ingreso.usuario === usuarioValido);
     const contraseñaEncontrada = baseDatos.find((ingreso) => ingreso.contraseña === contraseñaValida);
 
 
     if (usuarioEncontrado && contraseñaEncontrada) {
+      window.location= "historiaClinica.html";
       puedeContinuar = true;
       break;
     } else {
@@ -112,13 +138,19 @@ function validarUsuario() {
   }
 
   if (puedeContinuar) {
-    constatarParametros();
+    //constatarParametros();
+    alert("¡Bienvenido!");
   } else {
     alert("Usuario bloqueado.Dirigirse a Administracion");
   }
-}
+  return;
+});
 
-validarUsuario();
+
+
+
+
+
 
 ///////////////////////TRATAMIENTO//////////////////////////////////////
 
@@ -162,6 +194,7 @@ function nuevoTratamiento () {
   return mensaje;
 
 }
+
 
 
 

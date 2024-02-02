@@ -4,27 +4,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="./preentrega1.js"></script>
+    <script src="./preentrega1.js" defer></script>
     <link rel="stylesheet" href="./estilo.css">
     <title>Document</title>
 </head>
 
 <body>
-    <h1>PRIMERA PREENTREGA</h1>
-    <p>Protrocolo para la administracion de una medicacion llamada Clozapina. Por sus caractertisticas y efectos
-        secundarios debe seguir ciertas indicaciones.</p>
-    <p> 1) Ingreso al sistema a traves de un usuario y contraseña. Si se repite mas de 3 veces un error el usuario será
-        bloqueado y deberá dirigirse a administracion para su desbloqueo.</p>
+    <div class="ingresoSistema">
+        <div>
+            <img src="./multimedia/imagenes/bg2.jpg" alt="img-index" class="img-index">
+        </div>
+        <form action="text" class="formularioIndex" id="formulario">
+            <div class="labels1">
+                <div class="labelUsuario">
+                    <label for="usuario">Usuario</label>
+                    <input type="text" name="usuario" required>
+                </div>
+                <div class="labelContraseña">
+                    <label for="contraseña">Contraseña:</label>
+                    <input type="password" name="contraseña" required>
+                </div>
+        </form>
+        <div class="botones" id="btn">
+            <button type="submit" id="btnLogin">Ingresar</button>
+            <button type="reset">Borrar</button>
+        </div>
+    </div>
 
-    <p>2) Resultados de analisis clinicos del paciente. Aqui ciertos valores deberan estar dentro de lo esperable para
-        poder administrar la droga. Si algun valor no cumplira dicho requisito, deberá avisarle al médico para que
-        evalue como proceder. Parametros a considerar:
-        globulos blancos >= 1500
-    </p>
 
 
-    <p>3) Si todos los valores anteriores estan dentro de lo esperable, SI podra aceptarse la aplicacion la medicacion,
-        de lo contrario esta contraindicado</p>
 
 
 </body>
