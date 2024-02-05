@@ -155,7 +155,6 @@ form.addEventListener("submit", (event) => {
 
 
 
-
 ///////////////////////TRATAMIENTO//////////////////////////////////////
 
 /* function constatarParametros() {

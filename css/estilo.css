@@ -1,6 +1,6 @@
 body {
     background-color: white;
-    background-image: url(./multimedia/imagenes/bg1.jpg);
+    background-image: url(../multimedia/imagenes/bg1.jpg);
     background-repeat: no-repeat;
     background-size: cover;
     display: flex;
