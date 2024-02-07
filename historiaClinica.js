@@ -74,9 +74,14 @@ const cargarValoresProtocolo = document.querySelector ("#btnProtocolo");
 const cargarValoresTratamiento = document.querySelector ("#btnTratamiento");
 
 
-formProtocolo = addEventListener ("submit", (event) =>{
-    
-} )
+formProtocolo = addEventListener ("submit", (protocolo) =>{
+    protocolo.preventDefault();
+    const valor  = document.querySelector("#input-protocolo").value;
+    if (valor >=1500){
+        
+    }
+   
+})
 
 
 
