@@ -1,86 +1,97 @@
 const benzo = [
-    {
-      monodroga: 'alprazolam',
-      dosis: [0.5, 1],
-  
-    },
-    {
-      nombre: 'clonazepam',
-      dosis: [0.5, 1, 2],
-  
-    },
-    {
-      nombre: 'lorazepam',
-      dosis: [1, 2, 5],
-  
-    },
-    {
-      nombre: 'diazepam',
-      dosis: [5, 10],
-  
-    },
-  ];
-  
-  const antipsicoticos = [
-    {
-      nombre: 'haloperidol',
-      dosis: [5, 10]
-    },
-    {
-      nombre: 'risperidona',
-      dosis: [1, 2],
-    },
-    {
-      nombre: 'olanzapina',
-      dosis: [5, 10],
-  
-    },
-    {
-      nombre: 'quetiapina',
-      dosis: [25, 100, 200]
-    },
-    {
-      nombre: 'clozapina',
-      dosis: [25, 100]
-    }
-  ];
-  
-  const antidepresivos = [
-    {
-      nombre: 'sertralina',
-      dosis: [50, 100],
-    },
-  
-    {
-      nombre: 'fluoexetina',
-      dosis: [50, 100],
-  
-    },
-  
-    {
-      nombre: 'paroxetina',
-      dosis: [50, 100],
-  
-    }
-  ];
+  {
+    monodroga: 'alprazolam',
+    dosis: [0.5, 1],
+
+  },
+  {
+    nombre: 'clonazepam',
+    dosis: [0.5, 1, 2],
+
+  },
+  {
+    nombre: 'lorazepam',
+    dosis: [1, 2, 5],
+
+  },
+  {
+    nombre: 'diazepam',
+    dosis: [5, 10],
+
+  },
+];
+
+const antipsicoticos = [
+  {
+    nombre: 'haloperidol',
+    dosis: [5, 10]
+  },
+  {
+    nombre: 'risperidona',
+    dosis: [1, 2],
+  },
+  {
+    nombre: 'olanzapina',
+    dosis: [5, 10],
+
+  },
+  {
+    nombre: 'quetiapina',
+    dosis: [25, 100, 200]
+  },
+  {
+    nombre: 'clozapina',
+    dosis: [25, 100]
+  }
+];
+
+const antidepresivos = [
+  {
+    nombre: 'sertralina',
+    dosis: [50, 100],
+  },
+
+  {
+    nombre: 'fluoexetina',
+    dosis: [50, 100],
+
+  },
+
+  {
+    nombre: 'paroxetina',
+    dosis: [50, 100],
+
+  }
+];
 
 
 
 const formProtocolo = document.querySelector("#formulario1");
 const formTratamiento = document.querySelector("#formulario2");
-const valoresProtocolo = document.querySelector ("#input-protocolo");
-const valoresTratamiento = document.querySelector ("#input-tratamiento");
-const cargarValoresProtocolo = document.querySelector ("#btnProtocolo");
-const cargarValoresTratamiento = document.querySelector ("#btnTratamiento");
+const valoresProtocolo = document.querySelector("#input-protocolo");
+const valoresTratamiento = document.querySelector("#input-tratamiento");
+const cargarValoresProtocolo = document.querySelector("#btnProtocolo");
+const cargarValoresTratamiento = document.querySelector("#btnTratamiento");
 
 
-formProtocolo = addEventListener ("submit", (protocolo) =>{
-    protocolo.preventDefault();
-    const valor  = document.querySelector("#input-protocolo").value;
-    if (valor >=1500){
-        
-    }
-   
+formProtocolo = addEventListener("submit", (protocolo) => {
+  protocolo.preventDefault();
+  const valor = document.querySelector("#input-protocolo").value;
+  if (valor === "") {
+    alert("Por favor, ingrese un valor de 8 números.");
+    return;
+  }
+
+  if (valor.length < 5 || valor.length > 8) {
+    alert("El valor debe tener entre 5 y 8 números. Intente nuevamente.");
+    return;
+  }
+
+  if (!/^\d+$/.test(valor)) {
+    alert("El valor solo debe contener números del 0 al 9.");
+    return;
+  }
+
 })
 
 
