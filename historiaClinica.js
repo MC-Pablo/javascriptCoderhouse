@@ -72,27 +72,57 @@ const valoresProtocolo = document.querySelector("#input-protocolo");
 const valoresTratamiento = document.querySelector("#input-tratamiento");
 const cargarValoresProtocolo = document.querySelector("#btnProtocolo");
 const cargarValoresTratamiento = document.querySelector("#btnTratamiento");
+const saludoBienvenida = document.querySelector("#saludo");
 
 
-formProtocolo = addEventListener("submit", (protocolo) => {
+///////////////////SALUDO INICIAL///////////////////////////////////
+const saludoInicial = localStorage.getItem("usuario-ingresado");
+const saludoEnLS = JSON.parse (saludoInicial);
+
+let saludo = document.createElement ("h2");
+saludo.classList.add ("saludoBienvenida");
+saludo.innerText = "¡Bienvenido/a " + saludoEnLS["usuario"] + "!";
+saludoBienvenida.append (saludo);
+console.log (saludoEnLS );
+
+
+/* formProtocolo = addEventListener("submit", (protocolo) => {
   protocolo.preventDefault();
-  const valor = document.querySelector("#input-protocolo").value;
-  if (valor === "") {
-    alert("Por favor, ingrese un valor de 8 números.");
-    return;
-  }
-
-  if (valor.length < 5 || valor.length > 8) {
+  const valorP = document.querySelector("#input-protocolo").value;
+  
+  if (valorP.length < 5 || valor.length > 8) {
     alert("El valor debe tener entre 5 y 8 números. Intente nuevamente.");
     return;
   }
 
-  if (!/^\d+$/.test(valor)) {
+  if (!/^\d+$/.test(valorP)) {
     alert("El valor solo debe contener números del 0 al 9.");
     return;
   }
 
 })
+
+*/
+
+formTratamiento = addEventListener("submit", (tratamiento) => {
+  tratamiento.preventDefault();
+  const valorT = document.querySelector("#input-tratamiento").value;
+
+  if (valorT.length < 5 || valorT.length > 8) {
+    alert("El valor debe tener entre 5 y 8 números. Intente nuevamente.");
+    return;
+  }
+
+  if (!/^\d+$/.test(valorT)) {
+    alert("El valor solo debe contener números del 0 al 9.");
+    return;
+  }
+  
+
+})
+
+
+
 
 
 

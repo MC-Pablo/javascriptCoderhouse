@@ -71,11 +71,16 @@ form.addEventListener("submit", (event) => {
     if (puedeContinuar && intentosFallidos < 3) {
         alert("¡Bienvenido!");
         window.open ("./html/historiaClinica.html");
+        localStorage.setItem ("usuario-ingresado", JSON.stringify (usuarioEncontrado));
     } else {
         alert("Usuario bloqueado.Dirigirse a Administracion");
     }
 
 });
+
+
+  
+  
 
 
 
