@@ -75,15 +75,15 @@ const cargarValoresTratamiento = document.querySelector("#btnTratamiento");
 const saludoBienvenida = document.querySelector("#saludo");
 
 
+
 ///////////////////SALUDO INICIAL///////////////////////////////////
 const saludoInicial = localStorage.getItem("usuario-ingresado");
-const saludoEnLS = JSON.parse (saludoInicial);
+const saludoEnLS = JSON.parse(saludoInicial);
 
-let saludo = document.createElement ("h2");
-saludo.classList.add ("saludoBienvenida");
+let saludo = document.createElement("h2");
+saludo.classList.add("saludoBienvenida");
 saludo.innerText = "¡Bienvenido/a " + saludoEnLS["usuario"] + "!";
-saludoBienvenida.append (saludo);
-console.log (saludoEnLS );
+saludoBienvenida.append(saludo);
 
 
 /* formProtocolo = addEventListener("submit", (protocolo) => {
@@ -117,9 +117,16 @@ formTratamiento = addEventListener("submit", (tratamiento) => {
     alert("El valor solo debe contener números del 0 al 9.");
     return;
   }
-  
-
+ 
 })
+
+
+// Crea el nuevo elemento h2
+let menu = document.createElement("img");
+console.log (menu);
+
+
+
 
 
 
