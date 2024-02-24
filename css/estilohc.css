@@ -8,7 +8,7 @@ body {
     justify-content: center;
     margin: 0;
     font-family: 'DM Sans', sans-serif;
-    
+
 }
 
 .imghc {
@@ -25,22 +25,36 @@ form {
     align-items: center;
     text-align: center;
     margin: 20px;
-   
+
+    button {
+
+        justify-self: center;
+        padding: 10px 20px;
+        margin: 1px;
+        cursor: pointer;
+        background-color: #e26262;
+        color: whitesmoke;
+        border: none;
+        border-radius: 5px;
+        text-align: center;
+        color: whitesmoke;
+    }
+
 }
 
 label {
     display: flex;
-    font-weight:600;
+    font-weight: 600;
     margin-bottom: 5px;
     color: whitesmoke;
     font-weight: bold;
     flex-direction: column;
     text-align: center;
-    
+
 }
 
 input {
- 
+
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -53,21 +67,61 @@ input {
 
 }
 
-.saludo{
+.saludo {
     display: flex;
     flex-direction: column;
     margin: 10px;
-    
+
 }
-h1{
+
+h1 {
     color: aliceblue;
     text-align: center;
-    
+
 }
 
 h2 {
-    
+
     color: whitesmoke;
     text-align: center;
 
+}
+
+.menuUsuario {
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.mU {
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+    width: 50%;
+    gap: 20px;
+    justify-items: center;
+
+
+    li {
+        flex-grow: 1;
+        width: 30%;
+        text-align: center;
+
+    }
+
+    button {
+        width: 100%;
+        justify-self: center;
+        padding: 10px 20px;
+        margin: 5px;
+        cursor: pointer;
+        background-color: #e26262;
+        color: whitesmoke;
+        border: none;
+        border-radius: 5px;
+        text-align: center;
+        color: whitesmoke;
+
+    }
 }

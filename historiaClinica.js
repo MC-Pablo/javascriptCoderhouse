@@ -66,13 +66,14 @@ const antidepresivos = [
 
 
 
-const formProtocolo = document.querySelector("#formulario1");
-const formTratamiento = document.querySelector("#formulario2");
+
+let formTratamiento = document.querySelector("#formulario2");
 const valoresProtocolo = document.querySelector("#input-protocolo");
 const valoresTratamiento = document.querySelector("#input-tratamiento");
 const cargarValoresProtocolo = document.querySelector("#btnProtocolo");
 const cargarValoresTratamiento = document.querySelector("#btnTratamiento");
 const saludoBienvenida = document.querySelector("#saludo");
+const menuUsuario = document.querySelector("#menuUs");
 
 
 
@@ -84,6 +85,46 @@ let saludo = document.createElement("h2");
 saludo.classList.add("saludoBienvenida");
 saludo.innerText = "¡Bienvenido/a " + saludoEnLS["usuario"] + "!";
 saludoBienvenida.append(saludo);
+
+
+//////////////////FORMULARIO DE INGRESO DE PACIENTES ///////////////////////////
+
+formTratamiento = addEventListener("submit", (tratamiento) => {
+  tratamiento.preventDefault();
+  const valorT = document.querySelector("#input-tratamiento").value;
+
+  if (valorT.length < 5 || valorT.length > 8) {
+    alert("El valor debe tener entre 5 y 8 números. Intente nuevamente.");
+    return;
+  }
+
+  if (!/^\d+$/.test(valorT)) {
+    alert("El valor solo debe contener números del 0 al 9.");
+    return;
+  }
+  localStorage.setItem("Paciente", valorT);
+  ///////////////////////// Menu///////////////////////////////////
+  let menu = document.createElement("menu");
+  menu.classList.add("mU");
+  menu.innerHTML = `<li><button id="save">Iniciar protocolo de Clozapina</button></li>`;
+  menu.innerHTML += `<li><button id="share">Iniciar tratamiento</button></li>`;
+  menu.innerHTML += `<li><button id="share">Solicitar analítica </button></li>`;
+  menu.innerHTML += `<li><button id="share">Medicamentos en stock</button></li>`;
+  menuUs.append(menu);
+
+
+})
+
+
+
+
+
+
+
+
+
+
+
 
 
 /* formProtocolo = addEventListener("submit", (protocolo) => {
@@ -103,36 +144,6 @@ saludoBienvenida.append(saludo);
 })
 
 */
-
-formTratamiento = addEventListener("submit", (tratamiento) => {
-  tratamiento.preventDefault();
-  const valorT = document.querySelector("#input-tratamiento").value;
-
-  if (valorT.length < 5 || valorT.length > 8) {
-    alert("El valor debe tener entre 5 y 8 números. Intente nuevamente.");
-    return;
-  }
-
-  if (!/^\d+$/.test(valorT)) {
-    alert("El valor solo debe contener números del 0 al 9.");
-    return;
-  }
- 
-})
-
-
-// Crea el nuevo elemento h2
-let menu = document.createElement("img");
-console.log (menu);
-
-
-
-
-
-
-
-
-
 
 /* function constatarParametros() {
   let valorProtocolo = 

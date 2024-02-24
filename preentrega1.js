@@ -63,7 +63,7 @@ form.addEventListener("submit", (event) => {
         } else {
             puedeContinuar = false;
             intentosFallidos++;
-            alert("Usuario o contraseña incorrecta");
+            Swal.fire("Usuario o contraseña incorrecta.");
             return;
         }
     }
@@ -73,7 +73,11 @@ form.addEventListener("submit", (event) => {
         window.open ("./html/historiaClinica.html");
         localStorage.setItem ("usuario-ingresado", JSON.stringify (usuarioEncontrado));
     } else {
-        alert("Usuario bloqueado.Dirigirse a Administracion");
+        Swal.fire({
+          icon: "error",
+          title: "Usuario bloqueado.",
+          text: "Dirigirse a Administracion.",
+        });
     }
 
 });
