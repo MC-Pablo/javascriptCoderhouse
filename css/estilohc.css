@@ -42,6 +42,27 @@ form {
 
 }
 
+.formulario1 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 50%;
+    margin: 0 auto;
+
+    .inputCloza {
+        width: 25%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #6f3928;
+        border-radius: 5px;
+        font-size: 1rem;
+
+    }
+
+}
+
+
 label {
     display: flex;
     font-weight: 600;

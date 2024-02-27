@@ -103,90 +103,94 @@ formTratamiento = addEventListener("submit", (tratamiento) => {
     return;
   }
   localStorage.setItem("Paciente", valorT);
+  let formTratamiento = document.querySelector("#formulario2");
+  formTratamiento.remove()
+
   ///////////////////////// Menu///////////////////////////////////
   let menu = document.createElement("menu");
   menu.classList.add("mU");
-  menu.innerHTML = `<li><button id="save">Iniciar protocolo de Clozapina</button></li>`;
-  menu.innerHTML += `<li><button id="share">Iniciar tratamiento</button></li>`;
-  menu.innerHTML += `<li><button id="share">Solicitar analítica </button></li>`;
-  menu.innerHTML += `<li><button id="share">Medicamentos en stock</button></li>`;
+  menu.id = 'menu'
+  menu.innerHTML = `<li><button id="clozapina">Iniciar protocolo de Clozapina</button></li>`;
+  menu.innerHTML += `<li><button id="tto">Iniciar tratamiento</button></li>`;
+  menu.innerHTML += `<li><button id="anaítica">Solicitar analítica </button></li>`;
+  menu.innerHTML += `<li><button id="stock">Medicamentos en stock</button></li>`;
   menuUs.append(menu);
-
-
-})
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* formProtocolo = addEventListener("submit", (protocolo) => {
-  protocolo.preventDefault();
-  const valorP = document.querySelector("#input-protocolo").value;
   
-  if (valorP.length < 5 || valor.length > 8) {
-    alert("El valor debe tener entre 5 y 8 números. Intente nuevamente.");
-    return;
-  }
+  /////////////////PROTOCOLO DE CLOZAPINA//////////////////////////////////////////
+  let iniciarProtocolo = document.querySelector('#clozapina');
+  iniciarProtocolo.addEventListener('click', () => {
 
-  if (!/^\d+$/.test(valorP)) {
-    alert("El valor solo debe contener números del 0 al 9.");
-    return;
-  }
+    
+    const form = document.createElement('form');
+    form.id = 'iniciarProtocoloCloza'; 
+    form.classList.add('formulario1'); 
+
+    
+    const label = document.createElement('label');
+    label.for = 'inputCloza';
+    label.textContent = 'DNI o N° de Historia Clínica';
+    form.append(label);
+
+    const input = document.createElement('input');
+    input.type = 'text';
+    input.name = 'inputCloza';
+    input.id = 'input-tratamiento';
+    input.classList.add('inputCloza')
+    input.required = true; 
+    form.append(input);
+
+    
+    const container = document.querySelector('#container'); 
+    container.append(form);
+    
+
+  });
 
 })
 
-*/
+///////////////////////// Menu///////////////////////////////////
+
+
 
 /* function constatarParametros() {
-  let valorProtocolo = 
-  
-  let mensaje;
-  if (globulosBlancos >= 1500) {
-    mensaje = "Puede continuar con la titulacion de Clozapina";
-  } else {
-    mensaje = "¡Alerta!❌ Indicadores de Neutropenia. Evaluar titulacion";
-  }
-
-  alert(mensaje);
+ let valorProtocolo = 
+ 
+ let mensaje;
+ if (globulosBlancos >= 1500) {
+   mensaje = "Puede continuar con la titulacion de Clozapina";
+ } else {
+   mensaje = "¡Alerta!❌ Indicadores de Neutropenia. Evaluar titulacion";
+ }
+ 
+ alert(mensaje);
 }
-
-
+ 
+ 
 function continuarTratamiento() {
-  const indicacion = confirm("¿Desea realizar otra indicacion medica?");
-  if (indicacion) {
-    nuevoTratamiento();
-  } else {
-    return;
-  }
+ const indicacion = confirm("¿Desea realizar otra indicacion medica?");
+ if (indicacion) {
+   nuevoTratamiento();
+ } else {
+   return;
+ }
 }
-
 continuarTratamiento()
+*/
 
-function nuevoTratamiento () {
-  let nuevaIndicacion = prompt ('Medicacion indicada');
+
+function nuevoTratamiento() {
+  let nuevaIndicacion = prompt('Medicacion indicada');
   let mensaje;
-  const medicamentos1 = benzo.find  ((medicacion) => medicacion.nombre === nuevaIndicacion);
-  const medicamentos2 = antipsicoticos.find  ((medicacion) => medicacion.nombre === nuevaIndicacion);
-  
-  if (medicamentos1 || medicamentos2) { 
-  mensaje = 'Indicacion agregada al esquema farmacologico';
-  } else{
+  const medicamentos1 = benzo.find((medicacion) => medicacion.nombre === nuevaIndicacion);
+  const medicamentos2 = antipsicoticos.find((medicacion) => medicacion.nombre === nuevaIndicacion);
+
+  if (medicamentos1 || medicamentos2) {
+    mensaje = 'Indicacion agregada al esquema farmacologico';
+  } else {
     mensaje = 'Medicamento fuera de stock. Derivar a Centro de salud';
   }
-  alert (mensaje)
+  alert(mensaje)
   return mensaje;
-
 }
-
-
-*/
 
 
