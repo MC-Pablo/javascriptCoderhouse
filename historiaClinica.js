@@ -66,87 +66,149 @@ const antidepresivos = [
 
 
 
-
-let formTratamiento = document.querySelector("#formulario2");
-const valoresProtocolo = document.querySelector("#input-protocolo");
-const valoresTratamiento = document.querySelector("#input-tratamiento");
-const cargarValoresProtocolo = document.querySelector("#btnProtocolo");
-const cargarValoresTratamiento = document.querySelector("#btnTratamiento");
-const saludoBienvenida = document.querySelector("#saludo");
-const menuUsuario = document.querySelector("#menuUs");
-
-
-
 ///////////////////SALUDO INICIAL///////////////////////////////////
-const saludoInicial = localStorage.getItem("usuario-ingresado");
-const saludoEnLS = JSON.parse(saludoInicial);
+function saludar() {
+  const saludoBienvenida = document.querySelector("#saludo");
+  const saludoInicial = localStorage.getItem("usuario-ingresado");
+  const saludoEnLS = JSON.parse(saludoInicial);
 
-let saludo = document.createElement("h2");
-saludo.classList.add("saludoBienvenida");
-saludo.innerText = "¡Bienvenido/a " + saludoEnLS["usuario"] + "!";
-saludoBienvenida.append(saludo);
+  let saludo = document.createElement("h2");
+  saludo.classList.add("saludoBienvenida");
+  saludo.innerText = "¡Bienvenido/a " + saludoEnLS["usuario"] + "!";
+  saludoBienvenida.append(saludo);
+}
+saludar();
+crearnuevoform ();
 
 
 //////////////////FORMULARIO DE INGRESO DE PACIENTES ///////////////////////////
+function crearnuevoform (){
+let formTratamiento = document.querySelector("#formulario2");
+formTratamiento.addEventListener("submit", (event) => {
+  event.preventDefault();
+  const valorT = document.querySelector("#inputTratamiento");
+  let valorT1 = valorT.value;
 
-formTratamiento = addEventListener("submit", (tratamiento) => {
-  tratamiento.preventDefault();
-  const valorT = document.querySelector("#input-tratamiento").value;
+  validarInputForm2(valorT1);
+});
 
-  if (valorT.length < 5 || valorT.length > 8) {
+function validarInputForm2(valorT1) {
+
+  if (valorT1.length < 5 || valorT1.length > 8) {
     alert("El valor debe tener entre 5 y 8 números. Intente nuevamente.");
     return;
   }
 
-  if (!/^\d+$/.test(valorT)) {
+  if (!/^\d+$/.test(valorT1)) {
     alert("El valor solo debe contener números del 0 al 9.");
     return;
   }
-  localStorage.setItem("Paciente", valorT);
+  localStorage.setItem("Paciente", valorT1);
   let formTratamiento = document.querySelector("#formulario2");
-  formTratamiento.remove()
+  formTratamiento.remove();
+  crearMenu();
+}
+}
 
-  ///////////////////////// Menu///////////////////////////////////
+
+///////////////////////// Menu///////////////////////////////////
+function crearMenu() {
   let menu = document.createElement("menu");
+
   menu.classList.add("mU");
   menu.id = 'menu'
   menu.innerHTML = `<li><button id="clozapina">Iniciar protocolo de Clozapina</button></li>`;
   menu.innerHTML += `<li><button id="tto">Iniciar tratamiento</button></li>`;
-  menu.innerHTML += `<li><button id="anaítica">Solicitar analítica </button></li>`;
+  menu.innerHTML += `<li><button id="analítica">Solicitar analítica </button></li>`;
   menu.innerHTML += `<li><button id="stock">Medicamentos en stock</button></li>`;
+  const menuUs = document.querySelector("#menuUs");
   menuUs.append(menu);
-  
-  /////////////////PROTOCOLO DE CLOZAPINA//////////////////////////////////////////
   let iniciarProtocolo = document.querySelector('#clozapina');
-  iniciarProtocolo.addEventListener('click', () => {
+  iniciarProtocolo.addEventListener("click", crearFormularioClozapina);
 
-    
-    const form = document.createElement('form');
-    form.id = 'iniciarProtocoloCloza'; 
-    form.classList.add('formulario1'); 
+};
 
-    
-    const label = document.createElement('label');
-    label.for = 'inputCloza';
-    label.textContent = 'DNI o N° de Historia Clínica';
-    form.append(label);
+/////////////////PROTOCOLO DE CLOZAPINA////////////////////////////////
 
-    const input = document.createElement('input');
-    input.type = 'text';
-    input.name = 'inputCloza';
-    input.id = 'input-tratamiento';
-    input.classList.add('inputCloza')
-    input.required = true; 
-    form.append(input);
 
-    
-    const container = document.querySelector('#container'); 
-    container.append(form);
-    
+function crearFormularioClozapina() {
 
+  const form = document.createElement('form');
+  form.id = 'protocoloCloza';
+  form.classList.add('formulario1');
+
+  form.innerHTML = `<label for="inputCloza">Ingesar valores de Neutrófilos</label>`
+  form.innerHTML += `<label for="inputFechaCloza">Ingesar fecha del estudio</label>`
+
+  const input = document.createElement('input');
+  input.type = 'text';
+  input.id = 'inputCloza';
+  input.classList.add('inputCloza');
+  input.required = true;
+  form.append(input);
+
+  const input2 = document.createElement('input')
+  input2.id = 'inputFechaCloza';
+  input2.type = 'date';
+  input2.classList.add('inputFechaCloza');
+  form.append(input2);
+
+  const button = document.createElement('button');
+  button.type = 'submit';
+  button.id = 'btnProtocolo';
+  button.classList.add('btnProtocolo');
+  button.innerText = 'Cargar'
+  form.append(button);
+
+  const menuCloza = document.querySelector('#menuCloza');
+  menuCloza.append(form);
+
+///////////////////PROTROCOLO//////////////////////
+
+
+  const formCloza = document.querySelector('#protocoloCloza');
+  formCloza.addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    const inputCloza = document.querySelector("#inputCloza");
+    const valorCloza = inputCloza.value;
+    const inputFechaCloza = document.querySelector("#inputFechaCloza");
+    const valorFechaCloza = inputFechaCloza.value;
+    localStorage.setItem('valoresNeutropeniaFecha', valorFechaCloza); 
+    localStorage.setItem ('valoresNeutropenia', valorCloza );
+    validarInputCloza(valorCloza);
   });
 
-})
+  function validarInputCloza(valorCloza) {
+    if (valorCloza <= 1500) {
+      Swal.fire({
+        icon: "error",
+        title: "Indicadores de Neutropenia.",
+        text: "Reevaluar titulación.",
+      });
+      return;
+    };
+    if (!/^\d+$/.test(valorCloza)) {
+      alert("El valor solo debe contener números del 0 al 9.");
+      return;
+    };
+    
+  };
+};
+
+
+
+
+
+
+
+
+
+
+
+
+//////////////////////FORMULARIO CLOZAPIONA//////////////////////////////////////
+
 
 ///////////////////////// Menu///////////////////////////////////
 
@@ -178,7 +240,7 @@ continuarTratamiento()
 */
 
 
-function nuevoTratamiento() {
+/*function nuevoTratamiento() {
   let nuevaIndicacion = prompt('Medicacion indicada');
   let mensaje;
   const medicamentos1 = benzo.find((medicacion) => medicacion.nombre === nuevaIndicacion);
@@ -191,6 +253,6 @@ function nuevoTratamiento() {
   }
   alert(mensaje)
   return mensaje;
-}
+} */
 
 

@@ -57,7 +57,29 @@ form {
         border: 1px solid #6f3928;
         border-radius: 5px;
         font-size: 1rem;
+    }
 
+    .btnProtocolo{
+        width: 10%;
+        justify-self: center;
+        padding: 10px 20px;
+        margin: 5px;
+        cursor: pointer;
+        background-color: #e26262;
+        color: whitesmoke;
+        border: none;
+        border-radius: 5px;
+        text-align: center;
+        color: whitesmoke;
+    }
+
+    .inputFechaCloza{
+        width: 25%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #6f3928;
+        border-radius: 5px;
+        font-size: 1rem;
     }
 
 }
