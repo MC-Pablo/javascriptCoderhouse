@@ -1,64 +1,79 @@
-const benzo = [
+const benzodiazepinas = [
   {
-    monodroga: 'alprazolam',
+    nombre: 'Alprazolam',
     dosis: [0.5, 1],
+    stock: 'Si'
 
   },
   {
-    nombre: 'clonazepam',
+    nombre: 'Clonazepam',
     dosis: [0.5, 1, 2],
+    stock: 'si',
 
   },
   {
-    nombre: 'lorazepam',
+    nombre: 'Lorazepam',
     dosis: [1, 2, 5],
+    stock: 'si',
 
   },
   {
-    nombre: 'diazepam',
+    nombre: 'Diazepam',
     dosis: [5, 10],
-
+    stock: 'si',
   },
 ];
 
 const antipsicoticos = [
   {
-    nombre: 'haloperidol',
-    dosis: [5, 10]
-  },
-  {
-    nombre: 'risperidona',
-    dosis: [1, 2],
-  },
-  {
-    nombre: 'olanzapina',
+    nombre: 'Haloperidol',
     dosis: [5, 10],
+    stock: 'si',
+  },
+  {
+    nombre: 'Risperidona',
+    dosis: [1, 2],
+    stock: 'si',
+  },
+  {
+    nombre: 'Olanzapina',
+    dosis: [5, 10],
+    stock: 'si',
 
   },
   {
-    nombre: 'quetiapina',
-    dosis: [25, 100, 200]
+    nombre: 'Quetiapina',
+    dosis: [25, 100, 200],
+    stock: 'no',
   },
   {
-    nombre: 'clozapina',
-    dosis: [25, 100]
+    nombre: 'Clozapina',
+    dosis: [25, 100],
+    stock: 'si',
+  },
+
+  {
+    nombre: 'Aripiprazol',
+    dosis: 10,
+    stock: 'no'
+
   }
 ];
 
 const antidepresivos = [
   {
-    nombre: 'sertralina',
+    nombre: 'Sertralina',
     dosis: [50, 100],
   },
 
   {
-    nombre: 'fluoexetina',
+    nombre: 'Fluoexetina',
     dosis: [50, 100],
 
   },
 
   {
-    nombre: 'paroxetina',
+    nombre: 'Paroxetina',
     dosis: [50, 100],
 
   }
@@ -78,40 +93,40 @@ function saludar() {
   saludoBienvenida.append(saludo);
 }
 saludar();
-crearnuevoform ();
+crearnuevoform();
 
 
 //////////////////FORMULARIO DE INGRESO DE PACIENTES ///////////////////////////
-function crearnuevoform (){
-let formTratamiento = document.querySelector("#formulario2");
-formTratamiento.addEventListener("submit", (event) => {
-  event.preventDefault();
-  const valorT = document.querySelector("#inputTratamiento");
-  let valorT1 = valorT.value;
-
-  validarInputForm2(valorT1);
-});
-
-function validarInputForm2(valorT1) {
-
-  if (valorT1.length < 5 || valorT1.length > 8) {
-    alert("El valor debe tener entre 5 y 8 números. Intente nuevamente.");
-    return;
-  }
-
-  if (!/^\d+$/.test(valorT1)) {
-    alert("El valor solo debe contener números del 0 al 9.");
-    return;
-  }
-  localStorage.setItem("Paciente", valorT1);
+function crearnuevoform() {
   let formTratamiento = document.querySelector("#formulario2");
-  formTratamiento.remove();
-  crearMenu();
-}
+  formTratamiento.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const valorT = document.querySelector("#inputTratamiento");
+    let valorT1 = valorT.value;
+
+    validarInputForm2(valorT1);
+  });
+
+  function validarInputForm2(valorT1) {
+
+    if (valorT1.length < 5 || valorT1.length > 8) {
+      alert("El valor debe tener entre 5 y 8 números. Intente nuevamente.");
+      return;
+    }
+
+    if (!/^\d+$/.test(valorT1)) {
+      alert("El valor solo debe contener números del 0 al 9.");
+      return;
+    }
+    localStorage.setItem("Paciente", valorT1);
+    let formTratamiento = document.querySelector("#formulario2");
+    formTratamiento.remove();
+    crearMenu();
+  }
 }
 
 
-///////////////////////// Menu///////////////////////////////////
+/////////////////////////MENU////////////////////////////
 function crearMenu() {
   let menu = document.createElement("menu");
 
@@ -119,27 +134,39 @@ function crearMenu() {
   menu.id = 'menu'
   menu.innerHTML = `<li><button id="clozapina">Iniciar protocolo de Clozapina</button></li>`;
   menu.innerHTML += `<li><button id="tto">Iniciar tratamiento</button></li>`;
-  menu.innerHTML += `<li><button id="analítica">Solicitar analítica </button></li>`;
   menu.innerHTML += `<li><button id="stock">Medicamentos en stock</button></li>`;
+  menu.innerHTML += `<li><button id="atras"> Volver atrás </button></li>`;
   const menuUs = document.querySelector("#menuUs");
   menuUs.append(menu);
+
+  /////////////////////EVENTOS DEL MENU///////////////////////
   let iniciarProtocolo = document.querySelector('#clozapina');
   iniciarProtocolo.addEventListener("click", crearFormularioClozapina);
 
+  let IniciarTratamiento = document.querySelector("#tto");
+  IniciarTratamiento.addEventListener("click", iniciarTto);
+
+
+  let stockMedicamentos = document.querySelector("#stock");
+  stockMedicamentos.addEventListener("click", checkStock);
+
+  let volverAtrás = document.querySelector("#atras");
+  volverAtrás.addEventListener("click", atrás);
+
 };
 
-/////////////////PROTOCOLO DE CLOZAPINA////////////////////////////////
+
+/////////////////PROTOCOLO DE CLOZAPINA///////////////////////
 
 
 function crearFormularioClozapina() {
-
+  let iniciarProtocolo = document.querySelector('#clozapina');
+  iniciarProtocolo.removeEventListener("click", crearFormularioClozapina);
   const form = document.createElement('form');
   form.id = 'protocoloCloza';
   form.classList.add('formulario1');
 
   form.innerHTML = `<label for="inputCloza">Ingesar valores de Neutrófilos</label>`
-  form.innerHTML += `<label for="inputFechaCloza">Ingesar fecha del estudio</label>`
-
   const input = document.createElement('input');
   input.type = 'text';
   input.id = 'inputCloza';
@@ -147,6 +174,7 @@ function crearFormularioClozapina() {
   input.required = true;
   form.append(input);
 
+  form.innerHTML += `<label for="inputFechaCloza">Ingesar fecha del estudio</label>`
   const input2 = document.createElement('input')
   input2.id = 'inputFechaCloza';
   input2.type = 'date';
@@ -163,7 +191,8 @@ function crearFormularioClozapina() {
   const menuCloza = document.querySelector('#menuCloza');
   menuCloza.append(form);
 
-///////////////////PROTROCOLO//////////////////////
+
+  ///////////////////PROTROCOLO/////////////////////////
 
 
   const formCloza = document.querySelector('#protocoloCloza');
@@ -174,8 +203,8 @@ function crearFormularioClozapina() {
     const valorCloza = inputCloza.value;
     const inputFechaCloza = document.querySelector("#inputFechaCloza");
     const valorFechaCloza = inputFechaCloza.value;
-    localStorage.setItem('valoresNeutropeniaFecha', valorFechaCloza); 
-    localStorage.setItem ('valoresNeutropenia', valorCloza );
+    localStorage.setItem('valoresNeutropeniaFecha', valorFechaCloza);
+    localStorage.setItem('valoresNeutropenia', valorCloza);
     validarInputCloza(valorCloza);
   });
 
@@ -192,9 +221,136 @@ function crearFormularioClozapina() {
       alert("El valor solo debe contener números del 0 al 9.");
       return;
     };
-    
+
   };
 };
+
+
+
+function checkStock() {
+  const menuCloza = document.querySelector('#menuCloza');
+  menuCloza.innerHTML = "";
+
+  const titulo1 = document.createElement('h2');
+  titulo1.textContent = "Benzodiazepinas";
+  container.append(titulo1);
+
+  benzodiazepinas.forEach(benzo => {
+    const div = document.createElement('div');
+    div.classList.add('listaBenzodiazepinas');
+
+    div.innerHTML = `<div>
+  <h3 class="benzo-nombre">${benzo.nombre}</h3>
+  <p class="benzo-dosis"> mg.${benzo.dosis}</p>
+  <p class="benzo-stock">En stock: ${benzo.stock}</p>
+</div>`;
+
+    const container = document.querySelector("#container");
+    container.append(div);
+
+  });
+  const titulo2 = document.createElement('h2');
+  titulo2.textContent = "Antispicóticos";
+  container.append(titulo2);
+  antipsicoticos.forEach(antipsi => {
+    const div = document.createElement('div');
+    div.classList.add('listaAntipsicoticos');
+    div.innerHTML += `<div>
+  <h3 class="psi-nombre">${antipsi.nombre}</h3>
+  <p class="psi-dosis"> mg.${antipsi.dosis}</p>
+  <p class="psi-stock">En stock: ${antipsi.stock}</p>
+</div>`;
+
+    const container = document.querySelector("#container");
+    container.append(div);
+
+  });
+
+  const titulo3 = document.createElement('h2');
+  titulo3.textContent = "Antidepresivos";
+  container.append(titulo3);
+  antidepresivos.forEach(antidep => {
+    const div = document.createElement('div');
+    div.classList.add('listaAntidepresivos');
+    div.innerHTML += `<div>
+  <h3 class="antiDep-nombre">${antidep.nombre}</h3>
+  <p class="antiDep-dosis"> mg.${antidep.dosis}</p>
+  <p class="antiDep-stock">En stock: ${antidep.stock}</p>
+</div>`;
+
+    const container = document.querySelector("#container");
+    container.append(div);
+
+    let iniciarProtocolo = document.querySelector('#clozapina');
+    iniciarProtocolo.addEventListener("click", crearFormularioClozapina);
+
+
+  });
+
+
+
+}
+
+function atrás() {
+
+  window.history.go();
+}
+
+function iniciarTto() {
+
+  const pacienteEnLS = localStorage.getItem("Paciente");
+
+  const iniciarTto = document.createElement("div");
+  iniciarTto.innerHTML = `<h2> Paciente: ${pacienteEnLS}</h2>
+  <button type="submit" class="btnTto" id="btnHC"> Ver historia clínica </button>
+  <button type="submit" class="btnTto" id="BtnNuevoTto"> Iniciar esquema </button>
+
+  `
+  const container = document.querySelector("#container");
+  container.append(iniciarTto);
+
+  let hc = document.querySelector("#btnHC");
+  hc.addEventListener ("click", verHistoriaClinica);
+
+  let nuevoTto = document.querySelector("#BtnNuevoTto");
+  nuevoTto.addEventListener ("click", iniciarNuevoTto);
+}
+
+
+function iniciarNuevoTto () {
+const listaMedicamentos = document.createElement("div");
+listaMedicamentos.innerHTML = `<h2>Lista de Medicamentos</h2>
+<h3>Benzodiazepinas</h3>
+`;
+const container = document.querySelector("#container");
+container.append(listaMedicamentos);
+
+benzodiazepinas.forEach(benzo => {
+
+ 
+  const div = document.createElement('div');
+  div.classList.add('listaBenzodiazepinas');
+
+  div.innerHTML = `<div>
+<h3 class="benzo-nombre">${benzo.nombre}</h3>
+<p class="benzo-dosis"> mg.${benzo.dosis[0]}</p>
+<button class = "btnTto" id = "btnAgregarMedicacionDosis1"> Agregar</button>
+<p class="benzo-dosis"> mg.${benzo.dosis[1]}</p> 
+<button class = "btnTto" id = "btnAgregarMedicacionDosis2"> Agregar</button> 
+
+`
+const container = document.querySelector("#container");
+container.append(div);
+  
+});
+
+  
+
+}
+
+function verHistoriaClinica () {
+
+}
 
 
 
