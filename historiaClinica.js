@@ -339,7 +339,7 @@ function checkStock() {
     const div = document.createElement('div');
     div.classList.add('listaBenzodiazepinas');
 
-    div.innerHTML = `<div>
+    div.innerHTML = `<div class="benzo">
   <h3 class="benzo-nombre">${benzo.nombre}</h3>
   <p class="benzo-dosis"> mg.${benzo.dosis}</p>
   <p class="benzo-stock">En stock: ${benzo.stock}</p>
@@ -355,7 +355,7 @@ function checkStock() {
   antipsicoticos.forEach(antipsi => {
     const div = document.createElement('div');
     div.classList.add('listaAntipsicoticos');
-    div.innerHTML += `<div>
+    div.innerHTML += `<div class="antipsicoticos">
   <h3 class="psi-nombre">${antipsi.nombre}</h3>
   <p class="psi-dosis"> mg.${antipsi.dosis}</p>
   <p class="psi-stock">En stock: ${antipsi.stock}</p>
@@ -372,7 +372,7 @@ function checkStock() {
   antidepresivos.forEach(antidep => {
     const div = document.createElement('div');
     div.classList.add('listaAntidepresivos');
-    div.innerHTML += `<div>
+    div.innerHTML += `<div class="antidepresivos">
   <h3 class="antiDep-nombre">${antidep.nombre}</h3>
   <p class="antiDep-dosis"> mg.${antidep.dosis}</p>
   <p class="antiDep-stock">En stock: ${antidep.stock}</p>
@@ -401,6 +401,7 @@ function iniciarTto() {
   const pacienteEnLS = localStorage.getItem("Paciente");
 
   const iniciarTto = document.createElement("div");
+  iniciarTto.classList.add ("iniciarTto");
   iniciarTto.innerHTML = `<h2> Paciente: ${pacienteEnLS}</h2>
   <button type="submit" class="btnTto" id="btnHC"> Ver historia clínica </button>
   <button type="submit" class="btnTto" id="BtnNuevoTto"> Iniciar esquema </button>
@@ -419,6 +420,7 @@ function iniciarTto() {
 function iniciarNuevoTto() {
 
   const buscarMedicamento = document.createElement("div");
+  buscarMedicamento.classList.add ("buscarMed");
   buscarMedicamento.innerHTML =
     `
   <label for="buscarMed"> Agregar medicación </label>
