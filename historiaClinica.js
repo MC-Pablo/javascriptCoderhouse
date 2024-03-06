@@ -1,23 +1,27 @@
 const benzodiazepinas = [
   {
+    id: 'bz01',
     nombre: 'Alprazolam',
     dosis: [0.5, 1],
-    stock: 'Si'
+    stock: 'si'
 
   },
   {
+    id: 'bz02',
     nombre: 'Clonazepam',
     dosis: [0.5, 1, 2],
     stock: 'si',
 
   },
   {
+    id: 'bz03',
     nombre: 'Lorazepam',
     dosis: [1, 2, 5],
     stock: 'si',
 
   },
   {
+    id: 'bz04',
     nombre: 'Diazepam',
     dosis: [5, 10],
     stock: 'si',
@@ -26,33 +30,39 @@ const benzodiazepinas = [
 
 const antipsicoticos = [
   {
+    id: 'ap01',
     nombre: 'Haloperidol',
     dosis: [5, 10],
     stock: 'si',
   },
   {
+    id: 'ap02',
     nombre: 'Risperidona',
     dosis: [1, 2],
     stock: 'si',
   },
   {
+    id: 'ap03',
     nombre: 'Olanzapina',
     dosis: [5, 10],
     stock: 'si',
 
   },
   {
+    id: 'ap04',
     nombre: 'Quetiapina',
     dosis: [25, 100, 200],
     stock: 'no',
   },
   {
+    id: 'ap05',
     nombre: 'Clozapina',
     dosis: [25, 100],
     stock: 'si',
   },
 
   {
+    id: 'ap06',
     nombre: 'Aripiprazol',
     dosis: 10,
     stock: 'no'
@@ -62,22 +72,112 @@ const antipsicoticos = [
 
 const antidepresivos = [
   {
+    id: 'ad01',
     nombre: 'Sertralina',
     dosis: [50, 100],
+    stock: 'si',
   },
 
   {
+    id: 'ad02',
     nombre: 'Fluoexetina',
     dosis: [50, 100],
+    stock: 'si',
 
   },
 
   {
+    id: 'ad03',
     nombre: 'Paroxetina',
     dosis: [50, 100],
+    stock: 'si',
 
   }
 ];
+
+
+const medicacionEnStock = [
+
+  {
+    id: "bz01",
+    nombre: "alprazolam",
+    dosis: [0.5, 1],
+    stock: "si"
+  },
+  {
+    id: "bz02",
+    nombre: "clonazepam",
+    dosis: [0.5, 1, 2],
+    stock: "si"
+  },
+  {
+    id: "bz03",
+    nombre: "lorazepam",
+    dosis: [1, 2, 5],
+    stock: "si"
+  },
+  {
+    id: "bz04",
+    nombre: "diazepam",
+    dosis: [5, 10],
+    stock: "si"
+  },
+  {
+    id: "ap01",
+    nombre: "haloperidol",
+    dosis: [5, 10],
+    stock: "si"
+  },
+  {
+    id: "ap02",
+    nombre: "risperidona",
+    dosis: [1, 2],
+    stock: "si"
+  },
+  {
+    id: "ap03",
+    nombre: "olanzapina",
+    dosis: [5, 10],
+    stock: "si"
+  },
+  {
+    id: "ap04",
+    nombre: "quetiapina",
+    dosis: [25, 100, 200],
+    stock: "no"
+  },
+  {
+    id: "ap05",
+    nombre: "clozapina",
+    dosis: [25, 100],
+    stock: "si"
+  },
+  {
+    id: "ap06",
+    nombre: "aripiprazol",
+    dosis: 10,
+    stock: "no"
+  },
+  {
+    id: "ad01",
+    nombre: "sertralina",
+    dosis: [50, 100],
+    stock: "si"
+  },
+  {
+    id: "ad02",
+    nombre: "fluoxetina",
+    dosis: [50, 100],
+    stock: "si"
+  },
+  {
+    id: "ad03",
+    nombre: "paroxetina",
+    dosis: [50, 100],
+    stock: "si"
+  }
+];
+
 
 
 
@@ -192,7 +292,7 @@ function crearFormularioClozapina() {
   menuCloza.append(form);
 
 
-  ///////////////////PROTROCOLO/////////////////////////
+  ///////////////////VALIDACION DE PROTROCOLO/////////////////////////
 
 
   const formCloza = document.querySelector('#protocoloCloza');
@@ -310,47 +410,153 @@ function iniciarTto() {
   container.append(iniciarTto);
 
   let hc = document.querySelector("#btnHC");
-  hc.addEventListener ("click", verHistoriaClinica);
+  hc.addEventListener("click", verHistoriaClinica);
 
   let nuevoTto = document.querySelector("#BtnNuevoTto");
-  nuevoTto.addEventListener ("click", iniciarNuevoTto);
+  nuevoTto.addEventListener("click", iniciarNuevoTto);
+}
+
+function iniciarNuevoTto() {
+
+  const buscarMedicamento = document.createElement("div");
+  buscarMedicamento.innerHTML =
+    `
+  <label for="buscarMed"> Agregar medicación </label>
+  <input type="text" id="buscarMed" name="e" required>
+  <button type="button" id="agregarMed"> Buscar </button>
+  
+  `
+  const container = document.querySelector("#container");
+  container.append(buscarMedicamento);
+
+  const agregarMedicacion = document.querySelector("#agregarMed");
+  agregarMedicacion.addEventListener("click", searchMedicamento);
+
+
 }
 
 
-function iniciarNuevoTto () {
-const listaMedicamentos = document.createElement("div");
-listaMedicamentos.innerHTML = `<h2>Lista de Medicamentos</h2>
+function searchMedicamento() {
+  const nombreMedicamento = document.querySelector("#buscarMed").value.toLowerCase();
+  const medicamentoEncontrado = medicacionEnStock.find(medicamento => medicamento.nombre == nombreMedicamento && medicamento.stock === "si");
+  
+
+  if (medicamentoEncontrado) {
+    console.log(`Dosis disponibles: ${medicamentoEncontrado.dosis.join(", ")}`);
+    let mostrarDosis = document.createElement("div")
+    mostrarDosis.innerHTML = 
+    `
+    <p> Medicamento: ${medicamentoEncontrado.nombre} </p>
+    <p>Dosis disponibles (en mg.): ${medicamentoEncontrado.dosis.join(", ")}</p>    
+    `
+    const container = document.querySelector("#container");
+    container.append(mostrarDosis);
+    
+  } else {
+    alert('Medicamento no encontrado o fuera de stock');
+  }
+}
+
+
+
+
+
+
+
+
+
+function verHistoriaClinica() {
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+function iniciarNuevoTto() {
+  const listaMedicamentos = document.createElement("div");
+  listaMedicamentos.innerHTML = `<h2>Lista de Medicamentos</h2>
 <h3>Benzodiazepinas</h3>
 `;
-const container = document.querySelector("#container");
-container.append(listaMedicamentos);
+  const container = document.querySelector("#container");
+  container.append(listaMedicamentos);
 
-benzodiazepinas.forEach(benzo => {
+  benzodiazepinas.forEach(benzo => {
 
- 
-  const div = document.createElement('div');
-  div.classList.add('listaBenzodiazepinas');
 
-  div.innerHTML = `<div>
+    const div = document.createElement('div');
+    div.classList.add('listaBenzodiazepinas');
+
+    div.innerHTML = `<div>
 <h3 class="benzo-nombre">${benzo.nombre}</h3>
 <p class="benzo-dosis"> mg.${benzo.dosis[0]}</p>
-<button class = "btnTto" id = "btnAgregarMedicacionDosis1"> Agregar</button>
-<p class="benzo-dosis"> mg.${benzo.dosis[1]}</p> 
-<button class = "btnTto" id = "btnAgregarMedicacionDosis2"> Agregar</button> 
+<button class = "btnTto" id="${benzo.id}"> Agregar</button>
+<p class="benzo-dosis"> mg.${benzo.dosis[1]}</p>
+<button class = "btnTto" id="${benzo.id}"> Agregar</button>
 
 `
-const container = document.querySelector("#container");
-container.append(div);
-  
-});
+    const container = document.querySelector("#container");
+    container.append(div);
 
-  
+  });
+
+ actualizarMedicacion ();
+
+
+}
+
+function actualizarMedicacion () {
 
 }
 
-function verHistoriaClinica () {
+function actualizarBotonesAgregar() {
+  botonesAgregar = document.querySelectorAll(".producto-agregar");
+
+  botonesAgregar.forEach(boton => {
+      boton.addEventListener("click", agregarAlCarrito);
+  });
+}
+
+const medicacionEnHC = [];
+console.log(medicacionEnHC);
+
+function esquemaMedicacion(e) {
+
+const agregarBenzo = e.currentTarget.id;
+const benzoAgregada = benzodiazepinas.find (benzo => benzo.id === agregarBenzo);
+
+medicacionEnHC.push(benzoAgregada);
+
 
 }
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -370,7 +576,8 @@ function verHistoriaClinica () {
 
 
 
-/* function constatarParametros() {
+/* 
+function constatarParametros() {
  let valorProtocolo = 
  
  let mensaje;
@@ -409,6 +616,6 @@ continuarTratamiento()
   }
   alert(mensaje)
   return mensaje;
-} */
+}
 
-
+*/
