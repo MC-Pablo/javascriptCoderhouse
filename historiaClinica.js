@@ -260,6 +260,12 @@ function crearMenu() {
 
 
 function crearFormularioClozapina() {
+
+  const iniciarTto = document.querySelector('#nvoTto')
+  iniciarTto.innerHTML = '';
+  const medEnStock = document.querySelector('#verStock');
+  medEnStock.innerHTML = "";
+
   let iniciarProtocolo = document.querySelector('#clozapina');
   iniciarProtocolo.removeEventListener("click", crearFormularioClozapina);
   const form = document.createElement('form');
@@ -327,9 +333,21 @@ function crearFormularioClozapina() {
 
 
 
+
+
 function checkStock() {
+
+  let stockMedicamentos = document.querySelector("#stock");
+  stockMedicamentos.removeEventListener("click", checkStock);
+
   const menuCloza = document.querySelector('#menuCloza');
-  menuCloza.innerHTML = "";
+  menuCloza.innerHTML = '';
+  const iniciarTto = document.querySelector('#nvoTto')
+  iniciarTto.innerHTML = '';
+
+
+  const container = document.querySelector("#verStock");
+
 
   const titulo1 = document.createElement('h2');
   titulo1.textContent = "Benzodiazepinas";
@@ -338,14 +356,13 @@ function checkStock() {
   benzodiazepinas.forEach(benzo => {
     const div = document.createElement('div');
     div.classList.add('listaBenzodiazepinas');
-
     div.innerHTML = `<div class="benzo">
   <h3 class="benzo-nombre">${benzo.nombre}</h3>
   <p class="benzo-dosis"> mg.${benzo.dosis}</p>
   <p class="benzo-stock">En stock: ${benzo.stock}</p>
 </div>`;
 
-    const container = document.querySelector("#container");
+    const container = document.querySelector("#verStock");
     container.append(div);
 
   });
@@ -361,7 +378,7 @@ function checkStock() {
   <p class="psi-stock">En stock: ${antipsi.stock}</p>
 </div>`;
 
-    const container = document.querySelector("#container");
+    const container = document.querySelector("#verStock");
     container.append(div);
 
   });
@@ -378,7 +395,7 @@ function checkStock() {
   <p class="antiDep-stock">En stock: ${antidep.stock}</p>
 </div>`;
 
-    const container = document.querySelector("#container");
+    const container = document.querySelector("#verStock");
     container.append(div);
 
     let iniciarProtocolo = document.querySelector('#clozapina');
@@ -398,17 +415,26 @@ function atrás() {
 
 function iniciarTto() {
 
+
+  const menuCloza = document.querySelector('#menuCloza');
+  menuCloza.innerHTML = "";
+  const medEnStock = document.querySelector('#verStock');
+  medEnStock.innerHTML = "";
+  let IniciarTratamiento = document.querySelector("#tto");
+  IniciarTratamiento.removeEventListener("click", iniciarTto);
+
+
   const pacienteEnLS = localStorage.getItem("Paciente");
 
-  const iniciarTto = document.createElement("div");
-  iniciarTto.classList.add ("iniciarTto");
-  iniciarTto.innerHTML = `<h2> Paciente: ${pacienteEnLS}</h2>
+  const iniTto = document.createElement("div");
+  iniTto.classList.add("iniciarTto");
+  iniTto.innerHTML = `<h2> Paciente: ${pacienteEnLS}</h2>
   <button type="submit" class="btnTto" id="btnHC"> Ver historia clínica </button>
   <button type="submit" class="btnTto" id="BtnNuevoTto"> Iniciar esquema </button>
 
   `
-  const container = document.querySelector("#container");
-  container.append(iniciarTto);
+  const container = document.querySelector("#nvoTto");
+  container.append(iniTto);
 
   let hc = document.querySelector("#btnHC");
   hc.addEventListener("click", verHistoriaClinica);
@@ -418,14 +444,21 @@ function iniciarTto() {
 }
 
 function iniciarNuevoTto() {
+  const menuCloza = document.querySelector('#menuCloza');
+  menuCloza.innerHTML = "";
+  const medEnStock = document.querySelector('#verStock');
+  medEnStock.innerHTML = "";
+  let nuevoTto = document.querySelector("#BtnNuevoTto");
+  nuevoTto.removeEventListener("click", iniciarNuevoTto);
 
-  const buscarMedicamento = document.createElement("div");
-  buscarMedicamento.classList.add ("buscarMed");
+  const buscarMedicamento = document.createElement("form");
+  buscarMedicamento.classList.add("buscarMed");
   buscarMedicamento.innerHTML =
     `
   <label for="buscarMed"> Agregar medicación </label>
   <input type="text" id="buscarMed" name="e" required>
   <button type="button" id="agregarMed"> Buscar </button>
+  <button type="reset" id="borrarMed"> Borrar </button>
   
   `
   const container = document.querySelector("#container");
@@ -439,31 +472,54 @@ function iniciarNuevoTto() {
 
 
 function searchMedicamento() {
+
+  const menuCloza = document.querySelector('#menuCloza');
+  menuCloza.innerHTML = "";
+  const medEnStock = document.querySelector('#verStock');
+  medEnStock.innerHTML = "";
+
+
+
+
   const nombreMedicamento = document.querySelector("#buscarMed").value.toLowerCase();
   const medicamentoEncontrado = medicacionEnStock.find(medicamento => medicamento.nombre == nombreMedicamento && medicamento.stock === "si");
-  
+
 
   if (medicamentoEncontrado) {
     console.log(`Dosis disponibles: ${medicamentoEncontrado.dosis.join(", ")}`);
-    let mostrarDosis = document.createElement("div")
-    mostrarDosis.innerHTML = 
-    `
-    <p> Medicamento: ${medicamentoEncontrado.nombre} </p>
-    <p>Dosis disponibles (en mg.): ${medicamentoEncontrado.dosis.join(", ")}</p>    
-    `
-    const container = document.querySelector("#container");
-    container.append(mostrarDosis);
-    
+    mostrarDosis();
+
   } else {
     alert('Medicamento no encontrado o fuera de stock');
   }
-}
+
+  function mostrarDosis() {
 
 
+    let mostrarDosis = document.createElement("div")
+    mostrarDosis.id = 'mostrarDosis';
+    mostrarDosis.innerHTML =
+      `
+      <p> Medicamento: ${medicamentoEncontrado.nombre} </p>
+      <p>Dosis disponibles (en mg.): ${medicamentoEncontrado.dosis.join(", ")}</p>
+      <button type="button" class="borrarMed" id="volverAtras">Volver </button>    
+      `
+    const container = document.querySelector("#container");
+    container.append(mostrarDosis);
+    let volver = document.querySelector('#volverAtras');
+    volver.addEventListener('click', volverAformularioTto );
+    
+    
+  };
+  
+};
 
 
+function volverAformularioTto () { 
+  const volverATto = document.querySelector ('#mostrarDosis');
+  volverATto.innerHTML= '';
 
-
+  }
 
 
 
