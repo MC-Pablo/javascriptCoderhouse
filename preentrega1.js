@@ -69,9 +69,16 @@ form.addEventListener("submit", (event) => {
     }
 
     if (puedeContinuar && intentosFallidos < 3) {
-        alert("¡Bienvenido!");
-        window.open ("./html/historiaClinica.html");
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "Bienvenido/a",
+        showConfirmButton: false,
+        timer: 1100,
+      })
         localStorage.setItem ("usuario-ingresado", JSON.stringify (usuarioEncontrado));
+        setTimeout (redirigir, 1200);
+
     } else {
         Swal.fire({
           icon: "error",
@@ -79,6 +86,12 @@ form.addEventListener("submit", (event) => {
           text: "Dirigirse a Administracion.",
         });
     }
+
+function redirigir (){
+  window.open ("./html/historiaClinica.html");
+}
+    
+      
 
 });
 

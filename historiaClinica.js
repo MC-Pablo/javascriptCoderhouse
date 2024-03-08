@@ -266,6 +266,9 @@ function crearFormularioClozapina() {
   const medEnStock = document.querySelector('#verStock');
   medEnStock.innerHTML = "";
 
+  const agMd = document.querySelector("#agMd");
+  agMd.innerHTML='';
+
   let iniciarProtocolo = document.querySelector('#clozapina');
   iniciarProtocolo.removeEventListener("click", crearFormularioClozapina);
   const form = document.createElement('form');
@@ -344,6 +347,8 @@ function checkStock() {
   menuCloza.innerHTML = '';
   const iniciarTto = document.querySelector('#nvoTto')
   iniciarTto.innerHTML = '';
+  const agMd = document.querySelector("#agMd");
+  agMd.innerHTML='';
 
 
   const container = document.querySelector("#verStock");
@@ -444,12 +449,16 @@ function iniciarTto() {
 }
 
 function iniciarNuevoTto() {
+
   const menuCloza = document.querySelector('#menuCloza');
   menuCloza.innerHTML = "";
   const medEnStock = document.querySelector('#verStock');
   medEnStock.innerHTML = "";
   let nuevoTto = document.querySelector("#BtnNuevoTto");
   nuevoTto.removeEventListener("click", iniciarNuevoTto);
+  
+
+  
 
   const buscarMedicamento = document.createElement("form");
   buscarMedicamento.classList.add("buscarMed");
@@ -461,67 +470,65 @@ function iniciarNuevoTto() {
   <button type="reset" id="borrarMed"> Borrar </button>
   
   `
-  const container = document.querySelector("#container");
+  const container = document.querySelector("#agMd");
   container.append(buscarMedicamento);
 
   const agregarMedicacion = document.querySelector("#agregarMed");
   agregarMedicacion.addEventListener("click", searchMedicamento);
 
 
-}
 
+  function searchMedicamento() {
 
-function searchMedicamento() {
-
-  const menuCloza = document.querySelector('#menuCloza');
-  menuCloza.innerHTML = "";
-  const medEnStock = document.querySelector('#verStock');
-  medEnStock.innerHTML = "";
+    const menuCloza = document.querySelector('#menuCloza');
+    menuCloza.innerHTML = "";
+    const medEnStock = document.querySelector('#verStock');
+    medEnStock.innerHTML = "";
 
 
 
 
-  const nombreMedicamento = document.querySelector("#buscarMed").value.toLowerCase();
-  const medicamentoEncontrado = medicacionEnStock.find(medicamento => medicamento.nombre == nombreMedicamento && medicamento.stock === "si");
+    const nombreMedicamento = document.querySelector("#buscarMed").value.toLowerCase();
+    const medicamentoEncontrado = medicacionEnStock.find(medicamento => medicamento.nombre == nombreMedicamento && medicamento.stock === "si");
 
 
-  if (medicamentoEncontrado) {
-    console.log(`Dosis disponibles: ${medicamentoEncontrado.dosis.join(", ")}`);
-    mostrarDosis();
+    if (medicamentoEncontrado) {
+      console.log(`Dosis disponibles: ${medicamentoEncontrado.dosis.join(", ")}`);
+      mostrarDosis();
 
-  } else {
-    alert('Medicamento no encontrado o fuera de stock');
-  }
+    } else {
+      alert('Medicamento no encontrado o fuera de stock');
+    }
 
-  function mostrarDosis() {
+    function mostrarDosis() {
 
 
-    let mostrarDosis = document.createElement("div")
-    mostrarDosis.id = 'mostrarDosis';
-    mostrarDosis.innerHTML =
-      `
+      let mostrarDosis = document.createElement("div")
+      mostrarDosis.id = 'mostrarDosis';
+      mostrarDosis.innerHTML =
+        `
       <p> Medicamento: ${medicamentoEncontrado.nombre} </p>
       <p>Dosis disponibles (en mg.): ${medicamentoEncontrado.dosis.join(", ")}</p>
       <button type="button" class="borrarMed" id="volverAtras">Volver </button>    
       `
-    const container = document.querySelector("#container");
-    container.append(mostrarDosis);
-    let volver = document.querySelector('#volverAtras');
-    volver.addEventListener('click', volverAformularioTto );
-    
-    
+      const container = document.querySelector("#container");
+      container.append(mostrarDosis);
+      let volver = document.querySelector('#volverAtras');
+      volver.addEventListener('click', volverAformularioTto);
+
+
+    };
+
   };
-  
-};
+
+}
 
 
-function volverAformularioTto () { 
-  const volverATto = document.querySelector ('#mostrarDosis');
-  volverATto.innerHTML= '';
+function volverAformularioTto() {
+  const volverATto = document.querySelector('#mostrarDosis');
+  volverATto.innerHTML = '';
 
-  }
-
-
+}
 
 function verHistoriaClinica() {
 
