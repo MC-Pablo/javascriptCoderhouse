@@ -1,37 +1,12 @@
 
 
-////////////////////////// ARRAYS /////////////////////////////////
+let baseDatos = [];
+fetch ("./json/usuarios.json")
+.then(response => response.json())
+.then(data => {
+  baseDatos = data;
+});
 
-const baseDatos = [
-  {
-    usuario: "drmengele",
-    contraseña: "admin",
-  },
-  {
-    usuario: "drriviera",
-    contraseña: "admin",
-  },
-  {
-    usuario: "drfrink",
-    contraseña: "admin",
-  },
-  {
-    usuario: "drhouse",
-    contraseña: "admin",
-  }
-];
-
-function personal(nombre, profesion, especialidad) {
-  this.nombre = nombre;
-  this.profesion = profesion;
-  this.especialidad = especialidad;
-
-};
-
-const profesional1 = new personal("drmengele", "médico", "psiquiatra");
-const profesional2 = new personal("drriviera", "médico", "psiquiatra");
-const profesional3 = new personal("drfrink", "médico", "psiquiatra");
-const profesional4 = new personal("drhouse", "médico", "clinico");
 
 
 
@@ -88,11 +63,9 @@ form.addEventListener("submit", (event) => {
     }
 
 function redirigir (){
-  window.open ("./html/historiaClinica.html");
+  window.location.pathname = './html/historiaClinica.html';
 }
-    
-      
-
+     
 });
 
 
