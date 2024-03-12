@@ -362,24 +362,16 @@ function iniciarEsquema() {
       IniciarTratamiento.innerHTML = '';
 
     
-      let mostrarDosis = document.createElement("div")
-      mostrarDosis.classList.add('mostrarDosis');
-      mostrarDosis.id = 'mostrarDosis';
+      let mostrarDosis = document.querySelector('#mostrarDosis');
       mostrarDosis.innerHTML =
         `
       <p> Medicamento: ${medicamentoEncontrado.nombre} </p>
-      <p>Dosis disponibles (en mg.): ${medicamentoEncontrado.dosis.join(", ")}</p>`
-
-      mostrarDosis.innerHTML +=
-        ` 
+      <p>Dosis disponibles (en mg.): ${medicamentoEncontrado.dosis.join(", ")}</p>
       <div class = "btnDosis" id ="btnDosis">
       <button type="button" class="borrarMed" id="borrar">Borrar </button>
       <button type="button" class="agregarMed" id="agregar"> Agregar </button>        
       </div>
       `
-
-      const container = document.querySelector("#container");
-      container.append(mostrarDosis);
 
       let borrar = document.querySelector('#borrar');
       borrar.addEventListener('click', borrarMed);
@@ -395,7 +387,7 @@ function iniciarEsquema() {
 };
 
 function agregarMed (){
-  
+
 }
 
 
