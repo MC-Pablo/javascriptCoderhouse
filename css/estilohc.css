@@ -187,7 +187,7 @@ h2 {
 }
 
 
-.iniciarTto {
+.nuevoTratamiento {
 
     display: flex;
     flex-direction: column;
@@ -212,7 +212,7 @@ h2 {
     
 }
 
-.buscarMed {
+.iniciarEsquema {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -237,18 +237,17 @@ h2 {
 
         display: flex;
         flex-direction: column;
-        width: 30%;
+        width: 100%;
         padding: 10px;
         margin-bottom: 10px;
         border: 1px solid #6f3928;
         border-radius: 5px;
         font-size: 1rem;
 
-
     }
 
     button {
-        width: 20%;
+        width: 70%;
         justify-self: center;
         padding: 10px 20px;
         margin: 0 auto;
@@ -263,7 +262,8 @@ h2 {
 
 }
 
-.borrarMed {
+.borrarMed,
+.agregarMed {
     width: 20%;
     justify-self: center;
     padding: 10px 20px;
@@ -284,6 +284,7 @@ h2 {
     flex-direction: column;
     text-align: center;
     margin-top: 15px;
-    background-color: whitesmoke;
     box-sizing: border-box;
+    font-weight: 900;
+    color: black;
 }
