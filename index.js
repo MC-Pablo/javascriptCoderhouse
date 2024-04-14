@@ -63,7 +63,7 @@ form.addEventListener("submit", (event) => {
     }
 
 function redirigir (){
-  window.location.pathname = './html/historiaClinica.html';
+  window.location.href = "https://mc-pablo.github.io/javascriptCoderhouse/html/historiaClinica.html";
 }
      
 });
